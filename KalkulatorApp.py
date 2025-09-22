@@ -13,7 +13,6 @@ warning = 0
 error = 'error'
 def OnButtonClick(button_id):
         global x, y, z, wynik, warning, error
-
         if button_id == button_id not in ('C', '+', '-', '=', '/', '*'):
             if z != 0:
                 y = str(y) + str(button_id)
@@ -42,20 +41,37 @@ def OnButtonClick(button_id):
             if z == 1:
                 warning = 1
                 wynik = int(x)+int(y)
+                y = ''
+                x = ''
+                z = 0
             elif z == 2:
                 warning = 1
                 wynik = int(x)-int(y)
+                y = ''
+                x = ''
+                z = 0
             elif z == 3:
                 warning = 1
                 wynik = int(x)*int(y)
+                y = ''
+                x = ''
+                z = 0
             elif z == 4:
                 warning = 1
+                y = int(y)
                 if y == 0:
                     wynik = str(error)
+                    y = ''
+                    x = ''
+                    z = 0
                 else:
                     wynik = int(x)/int(y)
+                    y = ''
+                    x = ''
+                    z = 0
             if warning == 1:
                 label.config(text = wynik)
+
 
 
 toggle = Checkbutton(text = 'Number 1 is -')
@@ -63,7 +79,7 @@ toggle2 = Checkbutton(text = 'Number 2 is -')
 
 label = Label(window, text = x)
 label.config(bg='grey', pady = 10)
-label2 = Label(window, text = 'Po każdym działaniu nacisnąć C, nie dzielić przez 0 bo crash, pozdro, minusowe liczby też jeszcze nie działają', pady = 10)
+label2 = Label(window, text = 'Teraz już nie trzeba C naciskać, ale wynik się tylko wyświetla, pozdro, minusowe liczby też jeszcze nie działają', pady = 10)
 
 button1 = Button(window, text="1", pady=10, padx=10, command=lambda: OnButtonClick(1))
 button2 = Button(window, text="2", pady=10, padx=10, command=lambda: OnButtonClick(2))
@@ -109,6 +125,7 @@ toggle.grid(row=6, column=0,columnspan=2, sticky="ew")
 toggle2.grid(row=6, column=2, columnspan=2, sticky="ew")
 
 window.mainloop()
+
 
 #count = 0
 

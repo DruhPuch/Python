@@ -11,8 +11,15 @@ y = ''
 z = 0
 warning = 0
 error = 'error'
+
+chkValuex = BooleanVar()
+chkValuex.set(False)
+chkValuey = BooleanVar()
+chkValuey.set(False)
+
 def OnButtonClick(button_id):
-        global x, y, z, wynik, warning, error
+        global x, y, z, wynik, warning, error, chkValuex, chkValuey
+
         if button_id == button_id not in ('C', '+', '-', '=', '/', '*'):
             if z != 0:
                 y = str(y) + str(button_id)
@@ -74,12 +81,12 @@ def OnButtonClick(button_id):
 
 
 
-toggle = Checkbutton(text = 'Number 1 is -')
-toggle2 = Checkbutton(text = 'Number 2 is -')
+toggle = Checkbutton(text = 'Number 1 is -', var=chkValuex)
+toggle2 = Checkbutton(text = 'Number 2 is -', var=chkValuey)
 
 label = Label(window, text = x)
 label.config(bg='grey', pady = 10)
-label2 = Label(window, text = 'Teraz już nie trzeba C naciskać, ale wynik się tylko wyświetla, pozdro, minusowe liczby też jeszcze nie działają', pady = 10)
+label2 = Label(window, text = 'Teraz już nie trzeba C naciskać, ale wynik się tylko wyświetla - dodatkowo nie jest on pierwszą liczbą więc trzeba wprowadzić dalej 1 liczbę, pozdro, minusowe liczby też jeszcze nie działają', pady = 10)
 
 button1 = Button(window, text="1", pady=10, padx=10, command=lambda: OnButtonClick(1))
 button2 = Button(window, text="2", pady=10, padx=10, command=lambda: OnButtonClick(2))

@@ -1,3 +1,4 @@
+import asyncio
 from tkinter import *
 
 window = Tk()
@@ -16,6 +17,12 @@ chkValuex = BooleanVar()
 chkValuex.set(False)
 chkValuey = BooleanVar()
 chkValuey.set(False)
+
+async def sleepreset():
+    global warning
+    await asyncio.sleep(5)
+    warning = 0
+    label.config(text=x)
 
 def OnButtonClick(button_id):
         global x, y, z, wynik, warning, error, chkValuex, chkValuey
@@ -51,18 +58,21 @@ def OnButtonClick(button_id):
                 y = ''
                 x = ''
                 z = 0
+                sleepreset()
             elif z == 2:
                 warning = 1
                 wynik = int(x)-int(y)
                 y = ''
                 x = ''
                 z = 0
+                sleepreset()
             elif z == 3:
                 warning = 1
                 wynik = int(x)*int(y)
                 y = ''
                 x = ''
                 z = 0
+                sleepreset()
             elif z == 4:
                 warning = 1
                 y = int(y)
@@ -71,11 +81,13 @@ def OnButtonClick(button_id):
                     y = ''
                     x = ''
                     z = 0
+                    sleepreset()
                 else:
                     wynik = int(x)/int(y)
                     y = ''
                     x = ''
                     z = 0
+                    sleepreset()
             if warning == 1:
                 label.config(text = wynik)
 
@@ -86,7 +98,7 @@ toggle2 = Checkbutton(text = 'Number 2 is -', var=chkValuey)
 
 label = Label(window, text = x)
 label.config(bg='grey', pady = 10)
-label2 = Label(window, text = 'Teraz już nie trzeba C naciskać, ale wynik się tylko wyświetla - dodatkowo nie jest on pierwszą liczbą więc trzeba wprowadzić dalej 1 liczbę, pozdro, minusowe liczby też jeszcze nie działają', pady = 10)
+label2 = Label(window, text = 'Teraz już nie trzeba C naciskać, a wynik resetuje się po 5 sekundach - dodatkowo wynik nie jest pierwszą liczbą więc trzeba wprowadzić dalej 1 liczbę, pozdro, minusowe liczby też jeszcze nie działają', pady = 10)
 
 button1 = Button(window, text="1", pady=10, padx=10, command=lambda: OnButtonClick(1))
 button2 = Button(window, text="2", pady=10, padx=10, command=lambda: OnButtonClick(2))
